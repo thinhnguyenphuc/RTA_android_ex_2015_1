@@ -1,28 +1,23 @@
 package com.example.rta_demo.ProcessFile;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.example.rta_demo.R;
-import com.example.rta_demo.fileModel;
-
-import org.w3c.dom.Text;
+import com.example.rta_demo.File_Model;
 
 import java.util.ArrayList;
 
 public class ThreadForSQL extends AsyncTask<Void, Integer, Void> {
 
     private Activity context;
-    private ProcessWithSQL db;
-    private ArrayList<fileModel> files;
-    public ThreadForSQL(Activity context, ProcessWithSQL db, ArrayList<fileModel> files){
+    private File_Model.AppDatabase db;
+    private ArrayList<File_Model> files;
+    public ThreadForSQL(Activity context, File_Model.AppDatabase db, ArrayList<File_Model> files){
         this.context = context;
         this.db = db;
         this.files = files;
+
+
     }
     @Override
     protected void onPreExecute() {
@@ -31,10 +26,13 @@ public class ThreadForSQL extends AsyncTask<Void, Integer, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        ProcessWithSQL processWithSQL = new ProcessWithSQL(this.context);
 
         for(int i=0;i<files.size();i++){
-            processWithSQL.addFile(files.get(i));
+            File_Model.File_Model_DAO fileModelDao = db.getDAO();
+            File_Model tmp = fileModelDao.getItemById(i);
+            if(tmp==null){
+                fileModelDao.insert(files.get(i));
+            }
             onProgressUpdate(i);
         }
         return null;

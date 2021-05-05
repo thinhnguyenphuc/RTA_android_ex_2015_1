@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RTA_demo">
-        <activity android:name=".ReviewData"></activity>
+        <activity android:name=".LoadFile_Ver2"></activity>
+        <activity android:name=".ReviewData" />
         <activity
             android:name=".LoadFile"
             android:label="Import" />

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.rta_demo.fileModel;
+import com.example.rta_demo.File_Model;
 
 import java.util.ArrayList;
 
@@ -39,17 +39,17 @@ public class ProcessWithSQL extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public ArrayList<fileModel> allFile() {
+    public ArrayList<File_Model> allFile() {
 
-        ArrayList<fileModel> files = new ArrayList<fileModel>();
+        ArrayList<File_Model> files = new ArrayList<File_Model>();
         String query = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        fileModel file = null;
+        File_Model file = null;
 
         if (cursor.moveToFirst()) {
             do {
-                file = new fileModel();
+                file = new File_Model();
                 file.setName(cursor.getString(1));
                 file.setContent(cursor.getString(2));
                 file.setPath(cursor.getString(3));
@@ -58,7 +58,7 @@ public class ProcessWithSQL extends SQLiteOpenHelper {
         }
         return files;
     }
-    public void addFile(fileModel file) {
+    public void addFile(File_Model file) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, file.getName());
