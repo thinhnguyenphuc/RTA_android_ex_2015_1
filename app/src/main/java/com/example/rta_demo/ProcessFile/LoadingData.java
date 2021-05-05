@@ -6,6 +6,7 @@ import android.app.Activity;
 
 import android.os.AsyncTask;
 
+import android.os.Environment;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -73,7 +74,8 @@ public class LoadingData extends AsyncTask<Void, Integer, ArrayList<File_Model>>
         File_Model file = new File_Model();
         XmlPullParserFactory fc=XmlPullParserFactory.newInstance();
         XmlPullParser parser= fc.newPullParser();
-        String xmlfile=path;
+        String[] tmp=path.split("/");
+        String xmlfile = Environment.getExternalStorageDirectory()+ "/data/"+tmp[tmp.length-1];
         FileInputStream fIn=new FileInputStream(xmlfile);
         parser.setInput(fIn,"UTF-8");
         int eventType=-1;
@@ -98,7 +100,7 @@ public class LoadingData extends AsyncTask<Void, Integer, ArrayList<File_Model>>
         File in = new File(path);
         file.setName(in.getName());
         file.setPath(FilePath.fileOutSrc+"/"+in.getName());
-        file.setId(in.lastModified());
+        file.setId(file.getName());
         return  file;
     }
 

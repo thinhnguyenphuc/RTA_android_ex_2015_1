@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Delete;
 import androidx.room.Entity;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.PrimaryKey;
 import androidx.room.Query;
 import androidx.room.RoomDatabase;
@@ -16,12 +17,12 @@ import java.util.List;
 @Entity(tableName = "fileDB")
 public class File_Model {
     @PrimaryKey
-    @NonNull private long id;
+    @NonNull private String id;
     private String Name;
     private String Content;
     private String Path;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -49,7 +50,7 @@ public class File_Model {
         Content = content;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,8 +68,10 @@ public class File_Model {
         @Query("DELETE FROM fileDB")
         void delete();
 
+
+
     }
-    @Database(entities = {File_Model.class}, version = 1)
+    @Database(entities = {File_Model.class}, version = 2)
     public abstract static class AppDatabase extends RoomDatabase {
         public abstract File_Model.File_Model_DAO getDAO();
     }
