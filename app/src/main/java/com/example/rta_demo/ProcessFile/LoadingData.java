@@ -75,7 +75,7 @@ public class LoadingData extends AsyncTask<Void, Integer, ArrayList<File_Model>>
         XmlPullParserFactory fc=XmlPullParserFactory.newInstance();
         XmlPullParser parser= fc.newPullParser();
         String[] tmp=path.split("/");
-        String xmlfile = Environment.getExternalStorageDirectory()+ "/data/"+tmp[tmp.length-1];
+        String xmlfile = Environment.getExternalStorageDirectory()+ "/"+tmp[tmp.length-2]+"/"+tmp[tmp.length-1];
         FileInputStream fIn=new FileInputStream(xmlfile);
         parser.setInput(fIn,"UTF-8");
         int eventType=-1;
